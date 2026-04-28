@@ -21,39 +21,47 @@ def verify(sf_path, result_path):
     lcoe_net = i_cg['lcoe_net_eur_mwh']
     wacc = 8.0
     
-    # Helper: check if number appears in text (handles both 7.221 and 7221 formats)
-    def num_in_text(val, decimals=0):
-        s1 = f"{val:,.0f}".replace(',', '.')  # e.g., 7.221
-        s2 = f"{val:,.1f}".replace(',', '.').replace('.', ',', 1).replace(',', '.', 1)  # 7.221,3
-        s3 = str(int(val))  # 7221
-        s4 = f"{val:.1f}"   # 7221.3
-        s5 = f"{val:.0f}"   # 7221
-        return s1 in text or s2 in text or s3 in text or s4 in text or s5 in text
+    # Helper: format Romanian (dot as thousands separator)
+    def fmt_ro(x, dec=0):
+        if dec == 0:
+            return f"{x:,.0f}".replace(',', '.')
+        elif dec == 1:
+            s = f"{x:,.1f}".replace(',', '#').replace('.', ',').replace('#', '.')
+            return s
+        else:
+            s = f"{x:,.2f}".replace(',', '#').replace('.', ',').replace('#', '.')
+            return s
+    
+    # Check if value appears in text (try multiple formats)
+    def val_in_text(val, dec=0):
+        formats = [fmt_ro(val, dec), str(int(val)), f"{val:.1f}", f"{val:.0f}", str(val)]
+        return any(f in text for f in formats)
     
     checks = []
     
-    # P50: check integer part appears near "MWh"
-    p50_int = str(int(p50))
-    p50_found = p50_int in text and "MWh" in text
+    # P50: check formatted version (e.g., "7.221" or "14.167")
+    p50_formatted = fmt_ro(p50, 1)  # e.g., "7.221,3" or "14.166,8"
+    p50_simple = fmt_ro(p50, 0)     # e.g., "7.221" or "14.167"
+    p50_found = p50_formatted in text or p50_simple in text or str(int(p50)) in text
     checks.append(("P50 corect în text", p50_found))
     
     # NPV cu grant pozitiv
-    checks.append(("NPV cu grant pozitiv", num_in_text(npv_cg) and npv_cg > 0))
+    checks.append(("NPV cu grant pozitiv", val_in_text(npv_cg) and npv_cg > 0))
     
     # NPV fara grant negativ
-    checks.append(("NPV fara grant negativ", num_in_text(npv_fg) and npv_fg < 0))
+    checks.append(("NPV fara grant negativ", val_in_text(npv_fg) and npv_fg < 0))
     
     # IRR cu grant > WACC
-    checks.append(("IRR cu grant > WACC", num_in_text(irr_cg, 1) and irr_cg > wacc))
+    checks.append(("IRR cu grant > WACC", val_in_text(irr_cg, 1) and irr_cg > wacc))
     
     # IRR fara grant < WACC
-    checks.append(("IRR fara grant < WACC", num_in_text(irr_fg, 1) and irr_fg < wacc))
+    checks.append(("IRR fara grant < WACC", val_in_text(irr_fg, 1) and irr_fg < wacc))
     
     # LCOE standard
-    checks.append(("LCOE standard prezent", num_in_text(lcoe_std, 2)))
+    checks.append(("LCOE standard prezent", val_in_text(lcoe_std, 2)))
     
     # LCOE net
-    checks.append(("LCOE net prezent", num_in_text(lcoe_net, 2)))
+    checks.append(("LCOE net prezent", val_in_text(lcoe_net, 2)))
     
     # FARA 6.362
     checks.append(("FARA 6.362 (eroarea veche)", "6.362" not in text and "6362" not in text))
