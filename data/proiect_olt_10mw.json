@@ -1,36 +1,36 @@
 {
   "proiect": {
-    "denumire": "Parc Fotovoltaic JUDET PUTERE MWp",
-    "judet": "JUDET",
-    "localitate": "LOCALITATE",
-    "coordonate": "LAT, LON",
-    "adresa": "ADRESA COMPLETA",
-    "suprafata_ha": 0,
-    "altitudine_m": 0,
-    "putere_mwp": 0,
+    "denumire": "Parc Fotovoltaic Olt Nord 10MWp",
+    "judet": "Olt",
+    "localitate": "Slatina",
+    "coordonate": "44.4300, 24.3700",
+    "adresa": "Comuna Slatina, Str. Viitorului nr. 15, jud. Olt",
+    "suprafata_ha": 16,
+    "altitudine_m": 165,
+    "putere_mwp": 10,
     "tehnologie_panou": "TOPCon Bifacial",
     "tracker": "single-axis",
     "invertor": "Central HV",
     "bess": false,
     "durata_operare_ani": 25,
-    "durata_implementare_luni": 18
+    "durata_implementare_luni": 20
   },
   "date_clima": {
-    "iradianta_kwh_kwp_an": 0,
-    "temp_max_c": 0,
-    "temp_min_c": 0,
-    "temp_medie_c": 0,
-    "vant_max_kmh": 0,
-    "vant_mediu_kmh": 0,
-    "precipitatii_mm_an": 0,
-    "zile_ploaie": 0,
-    "zile_zapada": 0,
-    "aqi": 0,
-    "poluant_dominant": "O3"
+    "iradianta_kwh_kwp_an": 1420,
+    "temp_max_c": 38,
+    "temp_min_c": -18,
+    "temp_medie_c": 12,
+    "vant_max_kmh": 42,
+    "vant_mediu_kmh": 14,
+    "precipitatii_mm_an": 580,
+    "zile_ploaie": 82,
+    "zile_zapada": 18,
+    "aqi": 65,
+    "poluant_dominant": "PM10"
   },
   "pierderi_sistem": {
-    "temperatura_pct": 3.2,
-    "soiling_pct": 2.5,
+    "temperatura_pct": 3.0,
+    "soiling_pct": 2.8,
     "invertor_pct": 2.0,
     "cabluri_dc_pct": 1.5,
     "cabluri_ac_pct": 0.8,
@@ -38,15 +38,15 @@
     "disponibilitate_retea_pct": 1.0,
     "consum_propriu_pct": 0.8,
     "bonus_tracker_pct": 13.5,
-    "total_pierderi_pct": 12.0
+    "total_pierderi_pct": 12.1
   },
   "finante": {
-    "capex_total_eur": 0,
+    "capex_total_eur": 8500000,
     "grant_procent": 80,
-    "grant_eur": 0,
-    "cofinantare_eur": 0,
+    "grant_eur": 6800000,
+    "cofinantare_eur": 1700000,
     "tarif_ppa_eur_mwh": 72,
-    "opex_an1_eur": 60000,
+    "opex_an1_eur": 110000,
     "opex_crestere_anuala_pct": 2.0,
     "wacc_pct": 8.0,
     "orizont_ani": 25,
@@ -57,23 +57,23 @@
     "impozit_profit_pct": 16,
     "amortizare_ani": 25,
     "inlocuire_invertoare_an": 13,
-    "inlocuire_invertoare_cost_eur": 450000,
-    "asigurare_anuala_eur": 15000,
-    "impozit_cladiri_anuala_eur": 5000,
-    "taxe_echilibrare_anuala_eur": 15000,
-    "administrare_anuala_eur": 10000
+    "inlocuire_invertoare_cost_eur": 850000,
+    "asigurare_anuala_eur": 25000,
+    "impozit_cladiri_anuala_eur": 8000,
+    "taxe_echilibrare_anuala_eur": 20000,
+    "administrare_anuala_eur": 15000
   },
   "investitor": {
-    "denumire": "NUME FIRMA",
-    "cui": "CUI",
-    "onrc": "ONRC",
-    "telefon": "TELEFON",
-    "email": "EMAIL",
-    "reprezentant": "NUME, Administrator"
+    "denumire": "SC GREEN ENERGY OLT SRL",
+    "cui": "RO87654321",
+    "onrc": "J29/5678/2024",
+    "telefon": "+40 234 567 890",
+    "email": "office@greenenergyolt.ro",
+    "reprezentant": "Maria Ionescu, Administrator"
   },
   "impact": {
     "factor_emisie_kg_co2_kwh": 0.608,
-    "locuri_munca_constructie": 60,
-    "locuri_munca_operare": 7
+    "locuri_munca_constructie": 110,
+    "locuri_munca_operare": 12
   }
 }

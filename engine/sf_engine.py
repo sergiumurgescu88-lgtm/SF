@@ -289,7 +289,8 @@ if __name__ == '__main__':
     
     cfg_path = sys.argv[1]
     rez = run_all(cfg_path)
-    out_path = Path(cfg_path).parent.parent / 'output' / 'rezultat_dolj_v21.json'
+    base_name = Path(cfg_path).stem.replace("proiect_", "rezultat_")
+    out_path = Path(cfg_path).parent.parent / "output" / f"{base_name}_v21.json"
     out_path.parent.mkdir(parents=True, exist_ok=True)
     
     with open(out_path, 'w', encoding='utf-8') as f:
