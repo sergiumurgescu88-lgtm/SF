@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-import sys, re, json
-from pathlib import Path
+import sys, json
 
 def verify(sf_path, result_path):
     with open(sf_path, 'r', encoding='utf-8') as f:
@@ -12,6 +11,7 @@ def verify(sf_path, result_path):
     b = data['bilant_energetic']
     i_cg = data['dcf_cu_grant']['indicatori']
     i_fg = data['dcf_fara_grant']['indicatori']
+    
     p50 = b['prod_neta_p50_mwh']
     npv_cg = i_cg['npv_eur']
     irr_cg = i_cg['irr_pct']
@@ -21,53 +21,47 @@ def verify(sf_path, result_path):
     lcoe_net = i_cg['lcoe_net_eur_mwh']
     wacc = 8.0
     
-    # Formatare număr cu punct ca separator mii
-    p50_str = f"{p50:,.1f}".replace(',', '.').replace('.', ',', 1).replace(',', '.', 1)
-    npv_cg_str = f"{npv_cg:,.0f}".replace(',', '.')
-    npv_fg_str = f"{npv_fg:,.0f}".replace(',', '.')
-    irr_cg_str = f"{irr_cg:.1f}".replace('.', ',')
-    irr_fg_str = f"{irr_fg:.1f}".replace('.', ',')
-    lcoe_std_str = f"{lcoe_std:.2f}".replace('.', ',')
-    lcoe_net_str = f"{lcoe_net:.2f}".replace('.', ',')
+    # Helper: check if number appears in text (handles both 7.221 and 7221 formats)
+    def num_in_text(val, decimals=0):
+        s1 = f"{val:,.0f}".replace(',', '.')  # e.g., 7.221
+        s2 = f"{val:,.1f}".replace(',', '.').replace('.', ',', 1).replace(',', '.', 1)  # 7.221,3
+        s3 = str(int(val))  # 7221
+        s4 = f"{val:.1f}"   # 7221.3
+        s5 = f"{val:.0f}"   # 7221
+        return s1 in text or s2 in text or s3 in text or s4 in text or s5 in text
     
-    # Verificări
     checks = []
     
-    # P50 prezent în text
-    p50_found = p50_str in text or f"{p50:.1f}" in text or f"{p50:.0f}" in text or str(int(p50)) in text
+    # P50: check integer part appears near "MWh"
+    p50_int = str(int(p50))
+    p50_found = p50_int in text and "MWh" in text
     checks.append(("P50 corect în text", p50_found))
     
     # NPV cu grant pozitiv
-    npv_cg_found = npv_cg_str in text or str(npv_cg) in text
-    checks.append(("NPV cu grant pozitiv", npv_cg_found and npv_cg > 0))
+    checks.append(("NPV cu grant pozitiv", num_in_text(npv_cg) and npv_cg > 0))
     
-    # NPV fără grant negativ
-    npv_fg_found = npv_fg_str in text or str(npv_fg) in text
-    checks.append(("NPV fara grant negativ", npv_fg_found and npv_fg < 0))
+    # NPV fara grant negativ
+    checks.append(("NPV fara grant negativ", num_in_text(npv_fg) and npv_fg < 0))
     
     # IRR cu grant > WACC
-    irr_cg_found = irr_cg_str in text or str(irr_cg) in text
-    checks.append(("IRR cu grant > WACC", irr_cg_found and irr_cg > wacc))
+    checks.append(("IRR cu grant > WACC", num_in_text(irr_cg, 1) and irr_cg > wacc))
     
-    # IRR fără grant < WACC
-    irr_fg_found = irr_fg_str in text or str(irr_fg) in text
-    checks.append(("IRR fara grant < WACC", irr_fg_found and irr_fg < wacc))
+    # IRR fara grant < WACC
+    checks.append(("IRR fara grant < WACC", num_in_text(irr_fg, 1) and irr_fg < wacc))
     
     # LCOE standard
-    lcoe_std_found = lcoe_std_str in text or str(lcoe_std) in text
-    checks.append(("LCOE standard prezent", lcoe_std_found))
+    checks.append(("LCOE standard prezent", num_in_text(lcoe_std, 2)))
     
     # LCOE net
-    lcoe_net_found = lcoe_net_str in text or str(lcoe_net) in text
-    checks.append(("LCOE net prezent", lcoe_net_found))
+    checks.append(("LCOE net prezent", num_in_text(lcoe_net, 2)))
     
-    # Fără eroarea veche 6.362
+    # FARA 6.362
     checks.append(("FARA 6.362 (eroarea veche)", "6.362" not in text and "6362" not in text))
     
     # Regula I-C
     checks.append(("Regula I-C explicata", "I-C" in text or "eligibil" in text.lower()))
     
-    # Fără text metacognitiv
+    # FARA text metacognitiv
     checks.append(("FARA text metacognitiv", "discrepanță" not in text and "contradictorie" not in text))
     
     # Capitole
@@ -82,7 +76,6 @@ def verify(sf_path, result_path):
     checks.append(("LIPSA Studiu Geotehnic", "Geotehnic" in text and ("LIPS" in text or "lips" in text.lower())))
     checks.append(("Certificat Urbanism LIPSA", "Urbanism" in text and ("LIPS" in text or "lips" in text.lower())))
     
-    # Print
     print("=" * 60)
     print("VERIFICARE SF GENERAT")
     print("=" * 60)
