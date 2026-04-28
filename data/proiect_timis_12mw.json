@@ -1,0 +1,79 @@
+{
+    "proiect": {
+        "denumire": "Parc Fotovoltaic Timiș Est 12MWp",
+        "judet": "Timiș",
+        "localitate": "Izvoarele",
+        "coordonate": "45.4261, 27.2519",
+        "adresa": "Izvoarele, Str. Principala nr. 123, jud. Timiș, România",
+        "suprafata_ha": 16,
+        "altitudine_m": 50,
+        "putere_mwp": 12,
+        "tehnologie_panou": "TOPCon Bifacial",
+        "tracker": "single-axis",
+        "invertor": "Central HV",
+        "bess": false,
+        "durata_operare_ani": 25,
+        "durata_implementare_luni": 18
+    },
+    "date_clima": {
+        "iradianta_kwh_kwp_an": 1393,
+        "temp_max_c": 40.2,
+        "temp_min_c": -18.2,
+        "temp_medie_c": 13.2,
+        "vant_max_kmh": 47.2,
+        "vant_mediu_kmh": 16,
+        "precipitatii_mm_an": 552,
+        "zile_ploaie": 82,
+        "zile_zapada": 15,
+        "aqi": 88,
+        "poluant_dominant": "O3"
+    },
+    "pierderi_sistem": {
+        "temperatura_pct": 3.2,
+        "soiling_pct": 2.5,
+        "invertor_pct": 2.0,
+        "cabluri_dc_pct": 1.5,
+        "cabluri_ac_pct": 0.8,
+        "umbrire_pct": 1.0,
+        "disponibilitate_retea_pct": 1.0,
+        "consum_propriu_pct": 0.8,
+        "bonus_tracker_pct": 13.5,
+        "total_pierderi_pct": 12.0
+    },
+    "finante": {
+        "capex_total_eur": 10200000,
+        "grant_procent": 80,
+        "grant_eur": 8160000,
+        "cofinantare_eur": 2040000,
+        "tarif_ppa_eur_mwh": 72,
+        "opex_an1_eur": 144000,
+        "opex_crestere_anuala_pct": 2.0,
+        "wacc_pct": 8.0,
+        "orizont_ani": 25,
+        "degradare_panouri_anuala_pct": 0.5,
+        "valoare_reziduala_pct": 20
+    },
+    "fiscal": {
+        "impozit_profit_pct": 16,
+        "amortizare_ani": 25,
+        "inlocuire_invertoare_an": 13,
+        "inlocuire_invertoare_cost_eur": 450000,
+        "asigurare_anuala_eur": 15000,
+        "impozit_cladiri_anuala_eur": 5000,
+        "taxe_echilibrare_anuala_eur": 15000,
+        "administrare_anuala_eur": 10000
+    },
+    "investitor": {
+        "denumire": "SC GREEN VALLEY ENERGY SRL",
+        "cui": "RO12345678",
+        "onrc": "J35/1234/20XX",
+        "telefon": "+40 7XY ZZZ ZZZ",
+        "email": "contact@greenvalleyenergy.ro",
+        "reprezentant": "Popescu Ion, Administrator"
+    },
+    "impact": {
+        "factor_emisie_kg_co2_kwh": 0.608,
+        "locuri_munca_constructie": 50,
+        "locuri_munca_operare": 7
+    }
+}
