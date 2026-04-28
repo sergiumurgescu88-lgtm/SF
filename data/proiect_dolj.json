@@ -1,0 +1,79 @@
+{
+  "proiect": {
+    "denumire": "Parc Fotovoltaic Dolj Sud 5MWp",
+    "judet": "Dolj",
+    "localitate": "Craiova",
+    "coordonate": "44.3302, 23.7949",
+    "adresa": "Podari, Livezi, Str. Segarcea nr. 52, Craiova, România",
+    "suprafata_ha": 8,
+    "altitudine_m": 116,
+    "putere_mwp": 5,
+    "tehnologie_panou": "TOPCon Bifacial",
+    "tracker": "single-axis",
+    "invertor": "Central HV",
+    "bess": false,
+    "durata_operare_ani": 25,
+    "durata_implementare_luni": 18
+  },
+  "date_clima": {
+    "iradianta_kwh_kwp_an": 1446,
+    "temp_max_c": 40.8,
+    "temp_min_c": -15.1,
+    "temp_medie_c": 13.6,
+    "vant_max_kmh": 39.7,
+    "vant_mediu_kmh": 16,
+    "precipitatii_mm_an": 542,
+    "zile_ploaie": 85,
+    "zile_zapada": 14,
+    "aqi": 68,
+    "poluant_dominant": "O3"
+  },
+  "pierderi_sistem": {
+    "temperatura_pct": 3.2,
+    "soiling_pct": 2.5,
+    "invertor_pct": 2.0,
+    "cabluri_dc_pct": 1.5,
+    "cabluri_ac_pct": 0.8,
+    "umbrire_pct": 1.0,
+    "disponibilitate_retea_pct": 1.0,
+    "consum_propriu_pct": 0.8,
+    "bonus_tracker_pct": 13.5,
+    "total_pierderi_pct": 12.0
+  },
+  "finante": {
+    "capex_total_eur": 4500000,
+    "grant_procent": 80,
+    "grant_eur": 3600000,
+    "cofinantare_eur": 900000,
+    "tarif_ppa_eur_mwh": 72,
+    "opex_an1_eur": 60000,
+    "opex_crestere_anuala_pct": 2.0,
+    "wacc_pct": 8.0,
+    "orizont_ani": 25,
+    "degradare_panouri_anuala_pct": 0.5,
+    "valoare_reziduala_pct": 20
+  },
+  "fiscal": {
+    "impozit_profit_pct": 16,
+    "amortizare_ani": 25,
+    "inlocuire_invertoare_an": 13,
+    "inlocuire_invertoare_cost_eur": 450000,
+    "asigurare_anuala_eur": 15000,
+    "impozit_cladiri_anuala_eur": 5000,
+    "taxe_echilibrare_anuala_eur": 15000,
+    "administrare_anuala_eur": 10000
+  },
+  "investitor": {
+    "denumire": "SC SOLAR ENERGY DOLJ SRL",
+    "cui": "RO12345678",
+    "onrc": "J20/1234/2023",
+    "telefon": "+40 123 456 789",
+    "email": "contact@solarenergydolj.ro",
+    "reprezentant": "[Nume Prenume], Administrator"
+  },
+  "impact": {
+    "factor_emisie_kg_co2_kwh": 0.608,
+    "locuri_munca_constructie": 60,
+    "locuri_munca_operare": 7
+  }
+}
